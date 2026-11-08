@@ -1,0 +1,42 @@
+name: 重新生成题库清单
+
+# 修改题库或知识体系后，自动重建 data/bank.json 与 data/kg.json，
+# 让已安装的 App 能通过「题库更新」发现新版本。
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/数据结构.json'
+      - 'data/操作系统.json'
+      - 'data/计组.json'
+      - 'data/计网.json'
+      - 'tools/kg_source.json'
+      - 'tools/build_kg.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 校验并重建
+        run: python tools/build_kg.py
+      - name: 提交变更
+        run: |
+          if git diff --quiet -- data/bank.json data/kg.json; then
+            echo "数据无变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/bank.json data/kg.json
+          git commit -m "chore: 自动重建题库清单与知识图谱"
+          git push

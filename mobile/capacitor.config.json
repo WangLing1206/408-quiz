@@ -1,0 +1,9 @@
+{
+  "appId": "com.wang408.quiz",
+  "appName": "题库练习",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#FFFFFF",
+    "allowMixedContent": true
+  }
+}

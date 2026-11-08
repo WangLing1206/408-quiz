@@ -1,0 +1,20 @@
+// 国内网络加速：为所有工程（含 Capacitor 子工程）的构建脚本与依赖添加镜像。
+// 使用：gradlew.bat -I gradle/init.gradle assembleDebug
+gradle.allprojects { project ->
+    def mirrors = [
+        'https://maven.aliyun.com/repository/google',
+        'https://maven.aliyun.com/repository/public',
+        'https://maven.aliyun.com/repository/gradle-plugin',
+        'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/'
+    ]
+    try {
+        project.buildscript.repositories {
+            mirrors.each { m -> maven { url m; allowInsecureProtocol = false } }
+        }
+    } catch (Exception ignored) { }
+    try {
+        project.repositories {
+            mirrors.each { m -> maven { url m; allowInsecureProtocol = false } }
+        }
+    } catch (Exception ignored) { }
+}

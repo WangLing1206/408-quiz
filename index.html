@@ -2,27 +2,103 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>408 刷题网站 · 王道 2027</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%234f46e5%22/><text x=%2250%22 y=%2270%22 font-size=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22 font-weight=%22bold%22>408</text></svg>">
-<meta name="description" content="计算机考研 408 刷题网站：数据结构、计算机组成原理、操作系统、计算机网络 选择题与综合应用题练习。">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>题库练习</title>
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="题库练习：选择题、综合应用题、错题本、知识图谱与 AI 解析。支持离线安装。">
+<meta name="author" content="wwl">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="题库练习">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<style>
+/* 启动层关键样式内联，避免 WebView 首帧白屏 */
+html, body { margin: 0; background: #ffffff; }
+body.launching { overflow: hidden; }
+#launch {
+  position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 20px; padding: 24px;
+  background: #ffffff;
+  color: #1a2130; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  transition: opacity .5s ease, visibility .5s ease;
+}
+.launch-card {
+  width: min(72vw, 300px); aspect-ratio: 1 / 1; border-radius: 32px; overflow: hidden;
+  background: #ffffff; padding: 10px; box-sizing: border-box;
+  border: 1px solid #ffffff; box-shadow: 0 18px 50px rgba(33, 41, 80, .16), 0 0 0 1px #eef0f6;
+}
+.launch-video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 23px; background: #c9bfbe; }
+.launch-title { text-align: center; font-size: 23px; font-weight: 800; letter-spacing: .5px; color: #1a2130; }
+.launch-title span { display: block; margin-top: 5px; font-size: 11px; font-weight: 500; letter-spacing: 2.5px; color: #7a8296; }
+.launch-bar { width: 112px; height: 3px; background: #e9ecf4; border-radius: 99px; overflow: hidden; }
+.launch-bar i { display: block; height: 100%; width: 0; background: #4f46e5; border-radius: 99px; animation: launchbar 2.1s ease forwards; }
+@keyframes launchbar { to { width: 100%; } }
+.launch-out { opacity: 0; visibility: hidden; pointer-events: none; }
+</style>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-<header class="top">
-  <div class="top-inner">
-    <div class="brand">408 刷题<span>· 王道 2027</span></div>
-    <nav id="nav">
-      <a href="#/" data-v="home">首页</a>
-      <a href="#/xzt" data-v="xzt">选择题</a>
-      <a href="#/dt" data-v="dt">大题</a>
-      <a href="#/ct" data-v="ct">错题本<span id="ct-badge" class="badge hidden"></span></a>
-      <a href="#/stats" data-v="stats">统计</a>
-    </nav>
-  </div>
-</header>
-<main id="app" class="container"></main>
-<footer class="foot">数据来源：王道 2027 考研复习指导（扫描 OCR 提取）· 仅供个人学习使用</footer>
-<script src="assets/js/app.js"></script>
+<body class="launching">
+<div id="launch" class="launch" aria-hidden="true">
+  <div class="launch-bg"></div>
+  <div class="launch-card"><video id="launchVideo" class="launch-video" src="assets/media/launch.mp4" poster="assets/media/launch-poster.jpg" autoplay muted playsinline preload="auto"></video></div>
+  <div class="launch-title">题库练习<span>随时练习 · 稳步提升</span></div>
+  <div class="launch-bar"><i></i></div>
+</div>
+<script>
+try {
+  var _nativeWv = /; wv\)/.test(navigator.userAgent);
+  if (!_nativeWv && sessionStorage.getItem('q408.launched') === '1') {
+    var _l = document.getElementById('launch');
+    if (_l) _l.remove();
+    document.body.classList.remove('launching');
+  }
+} catch (e) {}
+</script>
+<div class="app-shell">
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="#/" aria-label="题库练习首页"><img class="brand-img" src="assets/icons/icon-192.png" alt=""><span class="brand-text">题库练习<em>随时练习 <span class="beta">BETA</span></em></span></a>
+      <nav id="deskNav" class="desk-nav" aria-label="主导航">
+        <a href="#/" data-v="home">首页</a>
+        <a href="#/xzt" data-v="xzt">选择题</a>
+        <a href="#/dt" data-v="dt">大题</a>
+        <a href="#/kg" data-v="kg">知识图谱</a>
+        <a href="#/ai" data-v="ai">AI 问答</a>
+        <a href="#/ct" data-v="ct">错题本</a>
+        <a href="#/stats" data-v="stats">统计</a>
+      </nav>
+      <a class="icon-btn top-settings" href="#/settings" aria-label="设置">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.9 19.3a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 8.9 4.6h.08A1.7 1.7 0 0 0 10 3.04V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 8.9v.08A1.7 1.7 0 0 0 20.96 10H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main id="app" class="container" tabindex="-1"></main>
+
+  <nav class="tabbar" id="tabbar" aria-label="底部导航">
+    <a href="#/" data-v="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.6 12 3l9 7.6V21a1 1 0 0 1-1 1h-5.5v-7h-5v7H4a1 1 0 0 1-1-1z"/></svg><span>首页</span>
+    </a>
+    <a href="#/xzt" data-v="xzt">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>刷题</span>
+    </a>
+    <a href="#/kg" data-v="kg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="17" r="2.4"/><path d="M8.2 8.3l6.2 6.6M16.6 7.6l-3.4 7.2M8.1 7.4l7.5-.8"/></svg><span>图谱</span>
+    </a>
+    <a href="#/ai" data-v="ai">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg><span>AI</span>
+    </a>
+    <a href="#/me" data-v="me" data-group="me settings sync ct stats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c.8-3.8 3.8-6 7.5-6s6.7 2.2 7.5 6"/></svg><span>我的</span>
+      <i class="tab-dot hidden" id="update-dot"></i>
+    </a>
+  </nav>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true"></div>
+<script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

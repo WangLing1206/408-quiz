@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "version": "05f3636986b6",
+  "generatedAt": "2026-11-07T04:53:23Z",
+  "repo": "WangLing1206/408-quiz",
+  "branch": "main",
+  "files": {
+    "数据结构.json": {
+      "sha256": "c399e3e37fc4175468f7d20db22d737b8e6283e1530d8fdc7ec0a2975a7c9bd3",
+      "qs": 545,
+      "bigq": 164,
+      "sections": 30
+    },
+    "计组.json": {
+      "sha256": "29cc2dbe809788506edae9c7cc876db9bca368c4786e8d2d8ede5332822433cd",
+      "qs": 529,
+      "bigq": 79,
+      "sections": 25
+    },
+    "操作系统.json": {
+      "sha256": "21c055510333a4f9d62ee0de3911f03933777c892b218c8474667fc73de36ec8",
+      "qs": 638,
+      "bigq": 110,
+      "sections": 16
+    },
+    "计网.json": {
+      "sha256": "bd1a640e0a4e8464343e96acaef1de13527b87d8c19120d5fdfc9935f15f1915",
+      "qs": 523,
+      "bigq": 79,
+      "sections": 28
+    }
+  },
+  "kg": {
+    "sha256": "dfa4c63451bfe37b090d7e7c503e82fdfc208adb1790cbf3fdbec4bdbdf89491",
+    "kps": 129
+  },
+  "totalQs": 2235,
+  "totalBigq": 432
+}

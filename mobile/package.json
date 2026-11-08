@@ -1,0 +1,21 @@
+{
+  "name": "408-quiz-mobile",
+  "version": "2.3.0-beta.1",
+  "private": true,
+  "description": "题库练习 Android 壳（Capacitor）",
+  "author": "wwl",
+  "scripts": {
+    "build:www": "python ../tools/build_www.py",
+    "sync": "npm run build:www && cap sync android",
+    "open": "cap open android",
+    "apk": "npm run sync && cd android && gradlew.bat assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "6.2.1",
+    "@capacitor/app": "^6.0.2",
+    "@capacitor/core": "6.2.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "6.2.1"
+  }
+}

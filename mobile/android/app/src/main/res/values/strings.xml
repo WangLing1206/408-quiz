@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">题库练习</string>
+    <string name="title_activity_main">题库练习</string>
+    <string name="package_name">com.wang408.quiz</string>
+    <string name="custom_url_scheme">com.wang408.quiz</string>
+</resources>
